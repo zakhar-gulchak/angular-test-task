@@ -1,4 +1,4 @@
-import {PriceType, Tariff} from "src/app/home/tariffs.service";
+import {PriceType, Tariff} from "src/app/dashboard/tariffs.service";
 
 export const tariffData
   : Tariff[] = [{
