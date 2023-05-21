@@ -1,16 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { TariffCost } from "../tariff-cost/tariff-cost.component";
-
-export interface Tariff {
-  price: number;
-  downloadSpeed: number;
-  uploadSpeed: number;
-  benefits: string[];
-  tariffType: string;
-  providerName: string;
-  tariffCost: TariffCost[];
-}
+import { Tariff } from "../tariffs.service";
 
 enum TabId {
   details,

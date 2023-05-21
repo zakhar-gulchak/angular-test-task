@@ -9,16 +9,16 @@ export class DropdownComponent {
   @Input() label!: string;
   @Input() values!: any[];
   @Input() placeholder: string = 'Select value';
-  @Input() onSelect = (v: any) => {};
+  @Input() selectFn = (v: any) => {};
   isDropdownOpened: boolean = false;
   selectedValue: any;
 
   constructor(private _elementRef: ElementRef) {
   }
 
-  select(value: any) {
+  selectValue(value: any) {
     this.selectedValue = value;
-    this.onSelect(value);
+    this.selectFn(value);
   }
 
   toggleDropdown() {

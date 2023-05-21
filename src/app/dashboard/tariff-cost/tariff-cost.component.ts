@@ -1,15 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface TariffCost {
-  serviceName: string;
-  price: number;
-  priceType: PriceType;
-}
-
-export enum PriceType {
-  oneTime = 'oneTime',
-  ongoing = 'ongoing'
-}
+import { PriceType, TariffCost } from "../tariffs.service";
 
 @Component({
   selector: 'app-tariff-cost',

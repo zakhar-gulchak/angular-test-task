@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
-import { Tariff } from 'src/app/dashboard/tariff-card/tariff-card.component';
-import { TariffsService } from './tariffs.service';
+import { TariffsService, Tariff } from './tariffs.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [TariffsService]
 })
+// todo rename component
 export class DashboardComponent {
   tariffs: Tariff[] = [];
   isCompareEnabled = false;
@@ -27,6 +26,7 @@ export class DashboardComponent {
 
   compare() {
     this.isTariffsLoading = true;
+    // todo params
     this.tariffsService.search('text')
       .subscribe(resp => {
         this.tariffs = resp;

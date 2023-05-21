@@ -23,8 +23,8 @@
   <div class="filters-block" *ngIf="tariffs.length">
     <h2>Determined Tariffs</h2>
     <div class="dropdowns-block">
-      <app-dropdown [label]="'Type of connection'" [values]="connectionsList" [onSelect]="selectConnection" />
-      <app-dropdown [label]="'Sorted by'" [values]="sortingList" [onSelect]="selectSortBy" />
+      <app-dropdown [label]="'Type of connection'" [values]="connectionsList" [selectFn]="selectConnection" />
+      <app-dropdown [label]="'Sorted by'" [values]="sortingList" [selectFn]="selectSortBy" />
     </div>
   </div>
   <app-tariff-card [tariff]="tariff" [isLoading]="isTariffsLoading" *ngFor="let tariff of tariffs;"/>

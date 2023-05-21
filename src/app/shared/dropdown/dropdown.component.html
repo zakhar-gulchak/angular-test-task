@@ -6,7 +6,7 @@
       <app-chevron-svg />
     </div>
     <div class="dropdown-values" [ngClass]="isDropdownOpened && values ? 'opened' : ''">
-      <div class="dropdown-value" *ngFor="let value of values;" (click)="select(value)">{{ value }}</div>
+      <div class="dropdown-value" *ngFor="let value of values;" (click)="selectValue(value)">{{ value }}</div>
     </div>
   </div>
 </div>

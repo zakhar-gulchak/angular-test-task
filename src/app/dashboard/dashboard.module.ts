@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { TariffCardComponent } from './tariff-card/tariff-card.component';
 import { TariffCostComponent } from './tariff-cost/tariff-cost.component';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
+import { TariffsService } from "./tariffs.service";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import { SpinnerComponent } from "../shared/spinner/spinner.component";
   ],
   exports: [
     DashboardComponent
+  ],
+  providers: [
+    TariffsService
   ]
 })
 export class DashboardModule { }
