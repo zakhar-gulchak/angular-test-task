@@ -1,0 +1,76 @@
+@import 'src/styles/variables';
+
+.internet-card {
+  width: 20rem;
+  margin: 0 auto;
+  border: 1px solid $gray;
+  color: $lighter-font;
+  padding: 20px;
+  text-align: center;
+  .card-header {
+    font-weight: 200;
+    font-size: 2.2rem;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $gray;
+  }
+  .postal-input {
+    input {
+      border-radius: 0;
+      border: 1px solid $gray;
+      margin-top: 10px;
+      padding: 10px 10px 20px;
+      width: 100%;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .speed-selection-block {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    .speed-boxes {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      .speed-box {
+        padding: 10px;
+        border: 1px solid $gray;
+        cursor: pointer;
+        &:hover, &.selected {
+          border-radius: 2px;
+          background-color: $base-color;
+          color: $dark-font;
+        }
+      }
+    }
+  }
+  .submit-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+.tariffs-block {
+  margin-top: 10px;
+  .filters-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    @media (max-width: 823px) {
+      justify-content: center;
+    }
+    h2 {
+      width: 200px;
+    }
+    .dropdowns-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 5px;
+    }
+  }
+}

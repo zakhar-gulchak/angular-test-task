@@ -1,0 +1,12 @@
+<div class="tariff-cost">
+  <div class="row heading">
+    <div class="label">Tariff costs</div>
+    <div class="tariff-price">One-time</div>
+    <div class="tariff-price">Ongoing</div>
+  </div>
+  <div class="row" *ngFor="let item of tariffCost;">
+    <div>{{ item.serviceName }}</div>
+    <div class="tariff-price">{{ item.priceType === PriceType.oneTime ? item.price + '€' : '' }}</div>
+    <div class="tariff-price">{{ item.priceType === PriceType.ongoing ? item.price + '€' : '' }}</div>
+  </div>
+</div>

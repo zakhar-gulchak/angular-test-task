@@ -1,0 +1,23 @@
+@import "src/styles/variables";
+
+@keyframes loadProgress {
+  from {width: 0;}
+  to {width: var(--progress);}
+}
+
+.progress-bar {
+  border: 1px solid $gray;
+  height: 5px;
+  width: 150px;
+  padding: 1px;
+  display: inline-block;
+  &:before {
+    content: "";
+    display: block;
+    animation-name: loadProgress;
+    animation-duration: 4s;
+    width: var(--progress);
+    height: 100%;
+    background-color: var(--color);
+  }
+}

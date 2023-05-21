@@ -1,0 +1,62 @@
+<div class="tariff-card" *ngIf="!isLoading">
+  <div class="main-content">
+    <div class="border-right provider-name">
+      <span>{{ tariff.providerName }}</span>
+    </div>
+    <div class="border-right tariff-type">
+      <div class="label">{{ tariff.tariffType }}</div>
+      <div class="tariff-speed upload">
+        <app-upload-svg />
+        <span class="speed">
+          {{ tariff.uploadSpeed }} Mbit/s
+        </span>
+        <app-progress-bar [value]="tariff.uploadSpeed" [maxValue]="100" [color]="'blue'" />
+      </div>
+      <div class="tariff-speed download">
+        <app-download-svg />
+        <span class="speed">
+          {{ tariff.downloadSpeed }} Mbit/s
+        </span>
+        <app-progress-bar [value]="tariff.downloadSpeed" [maxValue]="100" [color]="'green'" />
+      </div>
+      <ul class="benefits-list">
+        <li *ngFor="let benefit of tariff.benefits">
+          {{ benefit }}
+        </li>
+      </ul>
+    </div>
+    <div class="price-block">
+      <div class="price-value">{{ tariff.price }} €</div>
+      <div class="price-note">
+        Average price per month <br/>
+        (24 months)
+      </div>
+      <div class="buttons-block">
+        <div class="button secondary details-button" (click)="toggleDetails()" [ngClass]="isDetailsOpened ? 'opened' : ''">
+          Tariff Details
+          <app-chevron-svg />
+        </div>
+        <div class="button primary">To Tariff</div>
+      </div>
+    </div>
+  </div>
+  <div class="tariff-details" [ngClass]="isDetailsOpened ? 'opened' : ''" >
+    <div class="plank"><div class="cap"></div></div>
+    <div class="tariff-details-content">
+      <div class="tab-headers">
+        <div class="tab-header" *ngFor="let tab of tabList;" (click)="chooseTab(tab.id)" [ngClass]="selectedTab === tab.id ? 'selected' : ''">
+          {{tab.name}}
+        </div>
+      </div>
+      <div class="tab-content">
+        <app-tariff-cost *ngIf="selectedTab === TabId.details" [tariffCost]="tariff.tariffCost" />
+        <div *ngIf="selectedTab === TabId.speed">
+          Internet speed
+        </div>
+        <div *ngIf="selectedTab === TabId.benefits">
+          Benefits
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

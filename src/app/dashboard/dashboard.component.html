@@ -1,0 +1,32 @@
+<div class="internet-card">
+  <div class="card-header">
+    Internet
+  </div>
+  <div class="postal-input">
+    <input type="text" placeholder="Postal Code" maxlength="5" (keyup)="updatePostalCode($event)"/>
+  </div>
+  <div class="speed-selection-block">
+    <div class="label">Select Internet Speed</div>
+    <div class="speed-boxes">
+      <div class="speed-box" *ngFor="let speed of speedList" (click)="selectSpeed(speed)" [ngClass]="speed === selectedSpeed ? 'selected' : ''">
+        <b>{{ speed }}</b><br/>
+        Mbit/s
+      </div>
+    </div>
+  </div>
+  <div class="button primary submit-button" [ngClass]="isCompareEnabled ? '' : 'disabled'" (click)="isCompareEnabled && compare()">
+    Compare now
+  </div>
+</div>
+
+<div class="tariffs-block">
+  <div class="filters-block" *ngIf="tariffs.length">
+    <h2>Determined Tariffs</h2>
+    <div class="dropdowns-block">
+      <app-dropdown [label]="'Type of connection'" [values]="connectionsList" [onSelect]="selectConnection" />
+      <app-dropdown [label]="'Sorted by'" [values]="sortingList" [onSelect]="selectSortBy" />
+    </div>
+  </div>
+  <app-tariff-card [tariff]="tariff" [isLoading]="isTariffsLoading" *ngFor="let tariff of tariffs;"/>
+  <app-spinner *ngIf="isTariffsLoading"/>
+</div>

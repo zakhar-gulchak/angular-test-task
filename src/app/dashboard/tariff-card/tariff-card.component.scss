@@ -1,0 +1,149 @@
+@import 'src/styles/variables';
+
+@mixin heightTransition {
+  height: 0;
+  transition: 1s;
+}
+$tariffDetailsHeight: 240px;
+
+.tariff-card {
+  border: 1px solid $gray;
+  padding: 20px 0 0;
+  margin-bottom: 10px;
+  .main-content {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 25% 38% 37%;
+    > div {
+      padding: 0 10px;
+    }
+    .provider-name {
+      span {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+    .tariff-type {
+      > div {
+        line-height: 1.7;
+      }
+      .label {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+      .tariff-speed {
+        svg {
+          width: 12px;
+          margin-right: 4px;
+        }
+        &.upload .speed {
+          color: $cyan;
+        }
+        &.download .speed {
+          color: $green
+        }
+        .speed {
+          display: inline-block;
+          width: 80px;
+        }
+      }
+      .benefits-list {
+        padding: 0 0 0 20px;
+        margin: 0;
+        li {
+          list-style-image: url("../../../assets/checkmark-icon.svg");
+        }
+      }
+    }
+    .price-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      div {
+        text-align: right;
+      }
+      .price-value {
+        font-weight: bold;
+        font-size: 2.4rem;
+      }
+      .price-note {
+        color: $lighter-font;
+        line-height: 1.6;
+        padding: 5px 0 15px 0;
+      }
+      .buttons-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        .button {
+          text-align: center;
+        }
+        .details-button {
+          &.opened {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+    .border-right {
+      border-right: 1px solid $gray;
+    }
+    &~ :not(.opened) {
+      margin-bottom: 20px;
+    }
+  }
+  .tariff-details {
+    @include heightTransition;
+    visibility: hidden;
+    overflow: hidden;
+    margin: -1px;
+    position: relative;
+    &.opened {
+      visibility: visible;
+      height: $tariffDetailsHeight;
+      .tariff-details-content {
+        height: calc($tariffDetailsHeight - 43px);
+      }
+      .plank {
+        height: 22px;
+        .cap {
+          height: 23px;
+        }
+      }
+    }
+    .plank {
+      @include heightTransition;
+      width: calc(100% - 2px);
+      position: relative;
+      .cap {
+        @include heightTransition;
+        position: absolute;
+        right: calc(18.5% + 4px);
+        width: calc(18.5% - 17px);
+        border-left: 1px solid $base-color;
+        border-right: 1px solid $base-color;
+        background-color: white;
+      }
+    }
+    .tariff-details-content {
+      @include heightTransition;
+      padding: 10px 10px 9px;
+      border: 1px solid $base-color;
+      .tab-headers {
+        display: flex;
+        .tab-header {
+          width: 160px;
+          margin-right: 20px;
+          padding-bottom: 2px;
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 1.2rem;
+          &.selected {
+            border-bottom: 1px solid $base-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+@import './variables';
+
+body {
+  min-width: 490px;
+}
+.container {
+  padding: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.navbar {
+  height: 70px;
+  border-bottom: 30px solid $base-color;
+  .verivox-logo {
+    width: 170px;
+    height: 39px;
+    margin: 10px 0 20px 7vw;
+    background: url("../assets/verivox-logo.png") no-repeat;
+  }
+}
+
+.button {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px 0;
+  cursor: pointer;
+  &.disabled {
+    cursor: not-allowed;
+  }
+  &.primary {
+    background-color: $base-color;
+    color: $secondary-color;
+    &:hover {
+      &:not(.disabled) {
+        color: $secondary-hover-color;
+      }
+    }
+    &.disabled {
+      background: $disabled-primary-button-background;
+      color: $lighten-gray;
+    }
+  }
+  &.secondary {
+    border: 1px solid $base-color;
+    color: $base-color;
+    background-color: white;
+  }
+  svg.icon {
+    width: 16px;
+    vertical-align: top;
+  }
+}
+.input  {
+  svg.icon {
+    width: 20px;
+    vertical-align: bottom;
+  }
+}
+
