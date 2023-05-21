@@ -7,7 +7,7 @@ import { tariffData } from "src/testing/tariffData";
 import { DashboardComponent } from './dashboard.component';
 import { TariffsService } from "./tariffs.service";
 
-@Component({selector: 'app-spinner', template: ''})
+@Component({selector: 'app-spinner', template: '<div class="app-spinner"></div>'})
 class SpinnerStubComponent {
 }
 
@@ -15,7 +15,7 @@ class SpinnerStubComponent {
 class DropdownStubComponent {
 }
 
-@Component({selector: 'app-tariff-card', template: ''})
+@Component({selector: 'app-tariff-card', template: '<div class="app-tariff-card"></div>'})
 class TariffCardStubComponent {
 }
 
