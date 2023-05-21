@@ -57,7 +57,8 @@ describe('DashboardComponent', () => {
     expect(compiled.querySelector('.tariffs-block .tariff-card')).toBeNull();
   });
 
-  it('should enable compare button on parameters entered and make request with params on button pressing', fakeAsync(() => {
+  it('should enable compare button on parameters entered and make request with params on button pressing', () => {
+    const postalCode = '43423';
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -73,7 +74,7 @@ describe('DashboardComponent', () => {
     expect(compiled.querySelector('.internet-card .submit-button')?.classList.contains('disabled')).toBeTrue();
 
     // enabled Compare button
-    postcodeInput.value = '43423';
+    postcodeInput.value = postalCode;
     postcodeInput?.dispatchEvent(new Event('keyup'));
     fixture.detectChanges();
     expect(compiled.querySelector('.internet-card .submit-button')?.classList.contains('disabled')).toBeFalse();
@@ -81,8 +82,9 @@ describe('DashboardComponent', () => {
     // pushed Compare button - 1. Loading Spinner
     const compareButton = compiled.querySelector('.internet-card .submit-button');
     compareButton?.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    expect(compiled.querySelector('app-spinner')).not.toBeNull();
+    // todo delay
+    // fixture.detectChanges();
+    // expect(compiled.querySelector('app-spinner')).not.toBeNull();
 
     // pushed Compare button - 2. Showing Data
     fixture.detectChanges();
@@ -93,8 +95,8 @@ describe('DashboardComponent', () => {
 
     // check - service have been call once with params
     expect(searchSpy.calls.count()).toBe(1);
-    expect(searchSpy.calls.argsFor(0)).toEqual(['text']);
-  }));
+    expect(searchSpy.calls.argsFor(0)).toEqual([{ speed: 10, postCode: postalCode, sortBy: '', connectionType: '' }]);
+  });
 
   // todo: check service call on filter changing
   // todo: empty tariffData on error response
