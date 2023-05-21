@@ -7,7 +7,6 @@ import { TariffsService, Tariff } from './tariffs.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-// todo rename component
 export class DashboardComponent {
   tariffs: Tariff[] = [];
   isCompareEnabled = false;
@@ -26,8 +25,12 @@ export class DashboardComponent {
 
   compare() {
     this.isTariffsLoading = true;
-    // todo params
-    this.tariffsService.search('text')
+    this.tariffsService.search({
+      sortBy: this.sortBy,
+      postCode: this.postalCode,
+      connectionType: this.connectionType,
+      speed: this.selectedSpeed,
+    })
       .subscribe(resp => {
         this.tariffs = resp;
         this.isTariffsLoading = false;

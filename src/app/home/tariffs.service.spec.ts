@@ -16,7 +16,7 @@ describe('Tariff Service', () => {
   it('should return expected tariffs (HttpClient called once)', (done: DoneFn) => {
     httpClientSpy.get.and.returnValue(asyncData(tariffData));
 
-    tariffService.search('term').subscribe({
+    tariffService.search({}).subscribe({
       next: tariffs => {
         expect(tariffs)
           .withContext('expected tariffs')
@@ -38,7 +38,7 @@ describe('Tariff Service', () => {
 
     httpClientSpy.get.and.returnValue(asyncError(errorResponse));
 
-    tariffService.search('term').subscribe({
+    tariffService.search({}).subscribe({
       next: tariffs => {
         expect(tariffs)
           .withContext('expected tariffs')

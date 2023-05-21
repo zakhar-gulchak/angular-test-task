@@ -24,15 +24,26 @@ export enum PriceType {
   ongoing = 'ongoing'
 }
 
+interface SearchParams {
+  sortBy?: string;
+  postCode?: string;
+  connectionType?: string;
+  speed?: number | undefined;
+}
+
 @Injectable()
 export class TariffsService {
   constructor(private http: HttpClient) {}
 
   // todo: have to use custom webpack config to pass environment variables to Angular
-  search(term: string): Observable<Tariff[]> {
-    // todo: params
+  search({sortBy, postCode, connectionType, speed}: SearchParams): Observable<Tariff[]> {
+    const urlParams = new URLSearchParams();
+    sortBy && urlParams.set('sortBy', sortBy);
+    postCode && urlParams.set('postCode', postCode);
+    connectionType && urlParams.set('connectionType', connectionType);
+    speed && urlParams.set('speed', String(speed));
     return this.http
-      .get<Tariff[]>(`http://demo8456719.mockable.io/api/v1/tariffs?name=${term}`)
+      .get<Tariff[]>(`http://demo8456719.mockable.io/api/v1/tariffs?${urlParams.toString()}`)
       .pipe(catchError(error => {
         console.log(`Error in component ... ${error}`);
         return of<Tariff[]>([]);

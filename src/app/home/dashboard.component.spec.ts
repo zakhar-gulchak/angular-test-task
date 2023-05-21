@@ -1,7 +1,7 @@
-import {Component, Input, NO_ERRORS_SCHEMA} from "@angular/core";
+import {Component, NO_ERRORS_SCHEMA} from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import {of} from "rxjs";
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import { tariffData } from "src/testing/tariffData";
 import { DashboardComponent } from './dashboard.component';
@@ -57,13 +57,14 @@ describe('DashboardComponent', () => {
     expect(compiled.querySelector('.tariffs-block .tariff-card')).toBeNull();
   });
 
-  it('should enable compare button on parameters entered and make request with params on button pressing', () => {
+  it('should enable compare button on parameters entered and make request with params on button pressing', fakeAsync(() => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const postcodeInput: HTMLInputElement = compiled.querySelector('.internet-card .postal-input input')!;
     const speedBox = compiled.querySelector('.internet-card .speed-box');
 
+    // disabled Compare button
     postcodeInput.value = '4342'; // length < 5
     postcodeInput?.dispatchEvent(new Event('keyup'));
     speedBox?.dispatchEvent(new Event('click'));
@@ -71,26 +72,30 @@ describe('DashboardComponent', () => {
     expect(compiled.querySelectorAll('.internet-card .speed-box').length).toBe(4);
     expect(compiled.querySelector('.internet-card .submit-button')?.classList.contains('disabled')).toBeTrue();
 
+    // enabled Compare button
     postcodeInput.value = '43423';
     postcodeInput?.dispatchEvent(new Event('keyup'));
     fixture.detectChanges();
     expect(compiled.querySelector('.internet-card .submit-button')?.classList.contains('disabled')).toBeFalse();
 
+    // pushed Compare button - 1. Loading Spinner
     const compareButton = compiled.querySelector('.internet-card .submit-button');
     compareButton?.dispatchEvent(new Event('click'));
     fixture.detectChanges();
-    // expect(compiled.querySelector('app-spinner')).not.toBeNull();
+    expect(compiled.querySelector('app-spinner')).not.toBeNull();
 
+    // pushed Compare button - 2. Showing Data
+    fixture.detectChanges();
+    expect(compiled.querySelector('app-spinner')).toBeNull();
+    expect(compiled.querySelector('app-tariff-card')).not.toBeNull();
+    expect(compiled.querySelector('.filters-block')).not.toBeNull();
+    console.log(compiled);
+
+    // check - service have been call once with params
     expect(searchSpy.calls.count()).toBe(1);
     expect(searchSpy.calls.argsFor(0)).toEqual(['text']);
-  });
+  }));
 
-  // it('should render filter bar and spinner while data is loading', () => {
-  // })
-  //
-  // it('should render filter bar and tariff cards when there are results', () => {});
-  //
-  // it('should should render filter bar and no tariffs on http error', () => {})
-  //
-  // it('should make new request on filter values changing', () => {})
+  // todo: check service call on filter changing
+  // todo: empty tariffData on error response
 });
