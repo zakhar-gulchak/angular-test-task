@@ -43,7 +43,7 @@ export class TariffsService {
     connectionType && urlParams.set('connectionType', connectionType);
     speed && urlParams.set('speed', String(speed));
     return this.http
-      .get<Tariff[]>(`http://demo8456719.mockable.io/api/v1/tariffs?${urlParams.toString()}`)
+      .get<Tariff[]>(`https://demo5001340.mockable.io/api/v1/tariffs?${urlParams.toString()}`)
       .pipe(catchError(error => {
         console.log(`Error in component ... ${error}`);
         return of<Tariff[]>([]);
